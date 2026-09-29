@@ -1,6 +1,6 @@
 {
   "name": "@vitalie27dev/ngx-signal-devtools",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Dev-only overlay for Angular signals: dependency graph, recomputation counters and leak detection, with zero production cost.",
   "keywords": [
     "angular",

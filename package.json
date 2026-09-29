@@ -1,6 +1,6 @@
 {
   "name": "ngx-signal-devtools",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Workspace for @vitalie27dev/ngx-signal-devtools — a dev-only overlay for Angular signals.",
   "private": true,
   "license": "MIT",

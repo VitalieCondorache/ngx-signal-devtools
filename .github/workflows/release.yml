@@ -1,6 +1,13 @@
 name: Release
 
+# Two ways to ship a version:
+#   1. Push a `v*` tag: CI publishes exactly the version in projects/ngx-signal-devtools/package.json
+#      with provenance, authenticated through npm Trusted Publishing (no token stored in the repo).
+#   2. Run this workflow manually: release-it bumps the version, writes the changelog, commits, tags
+#      and publishes. `dry-run` defaults to true, so a first click is always safe.
 on:
+  push:
+    tags: ['v*']
   workflow_dispatch:
     inputs:
       dry-run:
@@ -17,7 +24,54 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  publish-tag:
+    name: publish the tagged version
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          registry-url: https://registry.npmjs.org
+
+      # Trusted publishing needs npm >= 11.5.1; Node 22 still ships npm 10.
+      - run: npm install --global npm@^11.5.1
+
+      - name: Check the tag against package.json
+        run: |
+          version=$(node -p 'require("./projects/ngx-signal-devtools/package.json").version')
+          if [ "${GITHUB_REF_NAME#v}" != "$version" ]; then
+            echo "::error::tag ${GITHUB_REF_NAME} does not match the packaged version ${version}"
+            exit 1
+          fi
+
+      - name: Check whether the version is already on npm
+        id: registry
+        run: |
+          version=$(node -p 'require("./projects/ngx-signal-devtools/package.json").version')
+          if npm view "@vitalie27dev/ngx-signal-devtools@${version}" version >/dev/null 2>&1; then
+            echo "published=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - if: steps.registry.outputs.published != 'true'
+        run: npm ci
+
+      - name: Build the library
+        if: steps.registry.outputs.published != 'true'
+        run: npm run build:lib
+
+      # Trusted Publishing: configure it once on npmjs.com (package -> Settings -> Trusted Publisher
+      # -> GitHub Actions: repository VitalieCondorache/ngx-signal-devtools, workflow release.yml).
+      - name: Publish with provenance
+        if: steps.registry.outputs.published != 'true'
+        run: npm publish dist/vitalie27dev/ngx-signal-devtools --provenance
+
   release:
+    name: bump, changelog, tag and publish
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

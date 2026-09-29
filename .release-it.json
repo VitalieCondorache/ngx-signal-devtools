@@ -42,6 +42,7 @@
     }
   },
   "hooks": {
-    "before:init": ["npm run lint", "npm run test:all"]
+    "before:init": ["npm run lint", "npm run test:all"],
+    "after:bump": ["npm run build:lib"]
   }
 }

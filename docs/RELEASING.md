@@ -40,14 +40,20 @@ Local publishing:
 npm login
 npm whoami              # must print the npm account that owns the scope
 npm run build:lib
-cd dist/vitalie27dev/ngx-signal-devtools && npm publish --access public --provenance
+cd dist/vitalie27dev/ngx-signal-devtools && npm publish --access public --no-provenance
 ```
 
-`--access public` is required for scoped packages, and `--provenance` attaches a signed
-attestation that links the tarball to this repository and workflow (both are also set through
-`publishConfig` in `projects/ngx-signal-devtools/package.json`).
+`--access public` is required for scoped packages. `--provenance` attaches a signed attestation that
+links the tarball to this repository and workflow, but it can only be generated inside a supported CI
+provider — locally, pass `--no-provenance` to override the `publishConfig` entry.
 
-CI publishing (preferred) uses **npm Trusted Publishing** with GitHub Actions OIDC:
+With two-factor authentication enabled, npm also requires either an authenticator code (`--otp=123456`)
+or a **granular access token with _bypass 2FA_ allowed**. Classic tokens, and granular tokens without
+that permission, are rejected with `E403 … Two-factor authentication or granular access token with
+bypass 2fa enabled is required`, even when `npm whoami` succeeds.
+
+CI publishing (preferred) uses **npm Trusted Publishing** with GitHub Actions OIDC, so no token and no
+OTP is involved:
 
 1. npmjs.com → the package → _Settings_ → _Trusted Publishing_ → add a GitHub Actions publisher for
    the repository `VitalieCondorache/ngx-signal-devtools` and the workflow `release.yml`.
@@ -72,6 +78,20 @@ creates the GitHub Release and publishes from `dist/…`.
 
 To rehearse without publishing: Actions → `Release` → _Run workflow_ with `dry-run: true`, or
 `npm run build:lib && npx release-it --dry-run`.
+
+### Publishing a version that is already bumped
+
+When the version, changelog and tag already exist in the repository (for example after a hotfix):
+
+```bash
+git push origin main
+git push origin vX.Y.Z   # the Release workflow publishes exactly that version, with provenance
+```
+
+The `publish-tag` job checks that the pushed tag matches
+`projects/ngx-signal-devtools/package.json`, skips itself when the version is already on npm, and
+rebuilds the library before publishing. `.release-it.json` rebuilds `dist/` in its `after:bump` hook,
+so a `release-it` run never publishes a stale artefact either.
 
 ## After the release
 

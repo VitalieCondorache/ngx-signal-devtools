@@ -6,8 +6,10 @@
 [![npm version](https://img.shields.io/npm/v/@vitalie27dev/ngx-signal-devtools.svg?color=CB3837)](https://www.npmjs.com/package/@vitalie27dev/ngx-signal-devtools)
 [![npm downloads](https://img.shields.io/npm/dm/@vitalie27dev/ngx-signal-devtools.svg)](https://www.npmjs.com/package/@vitalie27dev/ngx-signal-devtools)
 [![CI](https://github.com/VitalieCondorache/ngx-signal-devtools/actions/workflows/ci.yml/badge.svg)](https://github.com/VitalieCondorache/ngx-signal-devtools/actions/workflows/ci.yml)
+[![demo](https://img.shields.io/badge/demo-live-3fb950.svg)](https://vitaliecondorache.github.io/ngx-signal-devtools/)
 [![license](https://img.shields.io/npm/l/@vitalie27dev/ngx-signal-devtools.svg)](./LICENSE)
 
+[**live demo**](https://vitaliecondorache.github.io/ngx-signal-devtools/) &nbsp;·&nbsp;
 [**GitHub repository**](https://github.com/VitalieCondorache/ngx-signal-devtools) &nbsp;·&nbsp;
 [**showcase app**](https://github.com/VitalieCondorache/ngx-signal-devtools/tree/main/apps/demo)
 &nbsp;·&nbsp; [**CHANGELOG**](./CHANGELOG.md) &nbsp;·&nbsp;

@@ -11,8 +11,10 @@ was destroyed — in a dev-only overlay, with **zero production cost**.
 [![npm downloads](https://img.shields.io/npm/dm/@vitalie27dev/ngx-signal-devtools.svg)](https://www.npmjs.com/package/@vitalie27dev/ngx-signal-devtools)
 [![license](https://img.shields.io/npm/l/@vitalie27dev/ngx-signal-devtools.svg)](LICENSE)
 [![CI](https://github.com/VitalieCondorache/ngx-signal-devtools/actions/workflows/ci.yml/badge.svg)](https://github.com/VitalieCondorache/ngx-signal-devtools/actions/workflows/ci.yml)
+[![demo](https://img.shields.io/badge/demo-live-3fb950.svg)](https://vitaliecondorache.github.io/ngx-signal-devtools/)
 
 [**📦 npm package**](https://www.npmjs.com/package/@vitalie27dev/ngx-signal-devtools) &nbsp;·&nbsp;
+[**🎮 live demo**](https://vitaliecondorache.github.io/ngx-signal-devtools/) &nbsp;·&nbsp;
 [**📖 library docs**](projects/ngx-signal-devtools/README.md) &nbsp;·&nbsp;
 [**📝 changelog**](projects/ngx-signal-devtools/CHANGELOG.md) &nbsp;·&nbsp;
 [**🎮 showcase app**](apps/demo) &nbsp;·&nbsp;

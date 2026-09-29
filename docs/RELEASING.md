@@ -91,6 +91,7 @@ when the change is breaking.
 ## Demo deployment
 
 The `Demo (GitHub Pages)` workflow builds `apps/demo` with the correct `--base-href` and deploys
-`dist/demo/browser`. It is triggered manually until GitHub Pages is enabled
-(_Settings → Pages → Source: GitHub Actions_); after the first successful deployment uncomment the
-`push` trigger in `.github/workflows/pages.yml` to deploy on every push to `main`.
+`dist/demo/browser`. Pages must be enabled once (_Settings → Pages → Source: GitHub Actions_);
+afterwards every push to `main` that touches `apps/demo`, `projects` or the build files redeploys the
+showcase automatically. The smoke test in CI boots exactly that optimised bundle in Chromium, so a
+demo that fails to render is caught before it is deployed.

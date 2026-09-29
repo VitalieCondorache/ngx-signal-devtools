@@ -1,0 +1,206 @@
+<main class="page">
+  <header class="hero">
+    <div>
+      <p class="eyebrow">&#64;vitalie/ngx-signal-devtools</p>
+      <h1>Angular signal devtools</h1>
+      <p class="lede">
+        Dependency graph, recomputation counters and leak detection for Angular signals — rendered
+        in a dev-only overlay. Press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd> or use the
+        button below.
+      </p>
+    </div>
+    <div class="hero-actions">
+      <button type="button" class="primary" (click)="devtools.toggle()">
+        @if (devtools.open()) {
+          Close overlay
+        } @else {
+          Open overlay
+        }
+      </button>
+      <span class="tag" [class.tag-ok]="internalsAvailable">
+        @if (internalsAvailable) {
+          private graph: readable
+        } @else {
+          private graph: unavailable
+        }
+      </span>
+    </div>
+  </header>
+
+  <section class="grid">
+    <article class="card">
+      <h2>Instrumented store</h2>
+      <p class="muted">{{ summary() }}</p>
+
+      <form class="row" (submit)="addTodo(); $event.preventDefault()">
+        <input
+          type="text"
+          placeholder="Add a todo…"
+          [value]="draft()"
+          (input)="draft.set($any($event.target).value)"
+        />
+        <button type="submit">Add</button>
+      </form>
+
+      <div class="row filters">
+        @for (filter of filters; track filter) {
+          <button
+            type="button"
+            [class.active]="store.filter() === filter"
+            (click)="store.setFilter(filter)"
+          >
+            {{ filter }}
+          </button>
+        }
+      </div>
+
+      <ul class="todos">
+        @for (todo of store.visible(); track todo.id) {
+          <li [class.done]="todo.done">
+            <label>
+              <input type="checkbox" [checked]="todo.done" (change)="store.toggle(todo.id)" />
+              {{ todo.title }}
+            </label>
+            <button type="button" class="ghost" (click)="store.remove(todo.id)">✕</button>
+          </li>
+        } @empty {
+          <li class="muted">Nothing matches this filter.</li>
+        }
+      </ul>
+
+      <div class="row">
+        <button type="button" (click)="store.writeSameValue()">Write an equal value</button>
+        <span class="muted">→ reported as a no-op write</span>
+      </div>
+      <div class="row">
+        <button type="button" (click)="store.stopPersisting()">Destroy the persist effect</button>
+        <span class="muted">→ after that, todos changes stop persisting</span>
+      </div>
+    </article>
+
+    <article class="card">
+      <h2>Activity counters</h2>
+      <p class="muted">
+        Every counter below comes from instrumented signals; open the overlay and switch to the
+        <em>Events</em> tab to watch them react.
+      </p>
+
+      <div class="row">
+        <button type="button" (click)="bumpClicks()">clicks: {{ clicks() }}</button>
+        <button type="button" (click)="bumpPlainSignal()">plain signal: {{ plainSignal() }}</button>
+      </div>
+      <p class="muted">
+        The plain signal is not instrumented on purpose: it never shows up in the overlay.
+      </p>
+
+      <div class="row">
+        <button type="button" (click)="devtools.pause()" [disabled]="devtools.paused()">
+          Freeze
+        </button>
+        <button type="button" (click)="devtools.resume()" [disabled]="!devtools.paused()">
+          Resume
+        </button>
+        <button type="button" (click)="devtools.clear()">Clear data</button>
+        <button type="button" (click)="devtools.download()">Export JSON</button>
+      </div>
+
+      <dl class="stats">
+        <div>
+          <dt>tracked</dt>
+          <dd>{{ devtools.stats().tracked }}</dd>
+        </div>
+        <div>
+          <dt>live</dt>
+          <dd>{{ devtools.stats().live }}</dd>
+        </div>
+        <div>
+          <dt>computations</dt>
+          <dd>{{ devtools.stats().recomputations }}</dd>
+        </div>
+        <div>
+          <dt>reads</dt>
+          <dd>{{ devtools.stats().reads }}</dd>
+        </div>
+        <div>
+          <dt>writes</dt>
+          <dd>{{ devtools.stats().writes }}</dd>
+        </div>
+        <div>
+          <dt>diagnostics</dt>
+          <dd>{{ devtools.warnings().length }}</dd>
+        </div>
+      </dl>
+    </article>
+
+    <article class="card">
+      <h2>Leak detection</h2>
+      <p class="muted">
+        The widget below owns a signal and a 1&nbsp;s interval. Destroy it while it is in “leaky”
+        mode: the interval keeps writing a destroyed signal and the overlay flags it.
+      </p>
+
+      <div class="row">
+        <label class="switch">
+          <input
+            type="checkbox"
+            [checked]="leakyWidget()"
+            (change)="leakyWidget.set(!leakyWidget())"
+          />
+          leaky mode
+        </label>
+        <button type="button" (click)="toggleWidget()">
+          {{ showWidget() ? 'Destroy widget' : 'Recreate widget' }}
+        </button>
+        <button type="button" (click)="clearLeakedTimers()">Stop leaked timers</button>
+      </div>
+
+      @if (showWidget()) {
+        <app-leaky-widget label="widget" [leaky]="leakyWidget()" />
+      } @else {
+        <p class="muted">
+          Widget destroyed.
+          @if (leakedTimers() > 0) {
+            Cleared {{ leakedTimers() }} leaked timer(s).
+          }
+        </p>
+      }
+
+      <div class="row">
+        <button type="button" (click)="destroyPointlessEffect()">
+          Destroy the pointless effect
+        </button>
+        <span class="muted">expensiveScore: {{ expensiveLabel() }}</span>
+      </div>
+    </article>
+
+    <article class="card">
+      <h2>How it works</h2>
+      <ol class="steps">
+        <li><code>provideSignalDevtools()</code> installs a registry — only in development.</li>
+        <li>
+          <code>devSignal</code>, <code>devComputed</code> and <code>devEffect</code> wrap the
+          Angular primitives and record activity.
+        </li>
+        <li>
+          <code>trackSignal</code> observes signals you already have, without changing their
+          identity.
+        </li>
+        <li>
+          Dependencies and live consumers are read from the private reactive graph through
+          <code>ɵSIGNAL</code>, with a graceful fallback when it is unavailable.
+        </li>
+        <li>
+          The overlay is a lazy chunk: production builds never download it, and
+          <code>devSignal</code> degrades to a single reference check.
+        </li>
+      </ol>
+    </article>
+  </section>
+
+  <footer class="footer">
+    <span class="muted">
+      Demo app for the library in <code>projects/ngx-signal-devtools</code>. Open the browser
+      console and run <code>ngSignalDevtools.snapshot()</code> for the raw data.
+    </span>
+  </footer>
+</main>

@@ -1,12 +1,18 @@
 name: Demo (GitHub Pages)
 
-# Runs manually on purpose: enable Pages first (Settings -> Pages -> Source: GitHub Actions),
-# then run this workflow from the Actions tab. Uncomment the `push` trigger afterwards to deploy
-# the demo on every push to main.
+# Requires Pages to be enabled first (Settings -> Pages -> Source: GitHub Actions).
+# Deploys the showcase app on every push to main; can also be run manually from the Actions tab.
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/demo/**'
+      - 'projects/**'
+      - 'angular.json'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/pages.yml'
   workflow_dispatch:
-  # push:
-  #   branches: [main]
 
 permissions:
   contents: read

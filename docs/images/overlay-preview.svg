@@ -14,7 +14,12 @@
     <text x="316" y="33" fill="#8b93a7" font-size="11">1238 computed</text>
     <text x="414" y="33" fill="#8b93a7" font-size="11">9410 reads</text>
     <text x="490" y="33" fill="#8b93a7" font-size="11">312 writes</text>
-    <text x="800" y="34" fill="#9aa3b8" font-size="11">pause  collapse  clear  export  close</text>
+
+    <rect x="600" y="21" width="46" height="18" rx="9" fill="#3a1f22" stroke="#6b2b30" />
+    <polygon points="610,25 616,35 604,35" fill="#ffb4b4" />
+    <text x="613" y="34" fill="#ffb4b4" font-size="10">!</text>
+    <text x="626" y="34" fill="#ffb4b4" font-size="11">3</text>
+    <text x="660" y="34" fill="#9aa3b8" font-size="11">pause · clear · export · close</text>
 
     <!-- tabs -->
     <rect x="10" y="44" width="900" height="30" fill="#151824" />
@@ -38,9 +43,9 @@
 
     <!-- rows -->
     <g font-size="11">
-      <line x1="10" y1="122" x2="910" y2="122" stroke="#1d2230" />
+      <line x1="10" y1="126" x2="910" y2="126" stroke="#1d2230" />
       <text x="24" y="112" fill="#7dd3fc">todos</text>
-      <text x="24" y="123" fill="#6f7890" font-size="9">[{id:1,title:"Ship 0.1.0",done:false}]</text>
+      <text x="24" y="122" fill="#6f7890" font-size="9">[{id:1,title:"Ship 0.1.0",done:false}]</text>
       <text x="250" y="112" fill="#9aa3b8">signal</text>
       <text x="318" y="112" fill="#6f7890">todos.store.ts:31</text>
       <text x="520" y="112" fill="#9aa3b8" text-anchor="end">412</text>

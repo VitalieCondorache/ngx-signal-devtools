@@ -22,19 +22,19 @@
     </g>
 
     <text x="64" y="164" fill="#f4f6fb" font-size="46" font-weight="700">ngx-signal-devtools</text>
-    <text x="64" y="206" fill="#7dd3fc" font-size="19">dependency graph · recomputation counters · leak detection</text>
+    <text x="64" y="206" fill="#7dd3fc" font-size="17">dependency graph · recomputation counters · leak detection</text>
     <text x="64" y="238" fill="#8b93a7" font-size="16">Dev-only overlay for Angular signals, with zero production cost.</text>
 
     <g transform="translate(64, 262)">
       <rect width="216" height="30" rx="15" fill="#1b2130" stroke="#313749" />
       <text x="16" y="20" fill="#a9b2c7" font-size="13">zero production cost</text>
-      <rect x="228" width="150" height="30" rx="15" fill="#1b2130" stroke="#313749" />
+      <rect x="228" width="200" height="30" rx="15" fill="#1b2130" stroke="#313749" />
       <text x="244" y="20" fill="#a9b2c7" font-size="13">Angular 22 · zoneless</text>
-      <rect x="390" width="86" height="30" rx="15" fill="#1b2130" stroke="#313749" />
-      <text x="406" y="20" fill="#a9b2c7" font-size="13">MIT</text>
+      <rect x="440" width="86" height="30" rx="15" fill="#1b2130" stroke="#313749" />
+      <text x="456" y="20" fill="#a9b2c7" font-size="13">MIT</text>
     </g>
 
-    <g transform="translate(660, 56)">
+    <g transform="translate(672, 56)">
       <text x="6" y="10" fill="#6f7890" font-size="11">tracked signals</text>
       <text x="196" y="10" fill="#6f7890" font-size="11">computed</text>
       <text x="368" y="10" fill="#6f7890" font-size="11">consumers</text>

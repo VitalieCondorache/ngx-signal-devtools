@@ -1,59 +1,63 @@
-# NgxSignalDevtools
+# ngx-signal-devtools — monorepo
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.1.
+Workspace for the **[@vitalie/ngx-signal-devtools](projects/ngx-signal-devtools)** library: a dev-only
+overlay that shows the Angular signal graph, recomputation counters and leaked signals, with zero
+production cost.
 
-## Development server
+| Path                           | What it is                                                                                              |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------- |
+| `projects/ngx-signal-devtools` | The published library (`ng-packagr`, single entry point + lazy UI chunk).                               |
+| `apps/demo`                    | Showcase app used as documentation and manual test bench (instrumented store, leak demo, no-op writes). |
+| `tools/probe-internals.mjs`    | Canary that prints the private reactive node shape of the installed Angular version.                    |
 
-To start a local development server, run:
-
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Getting started
 
 ```bash
-ng generate component component-name
+npm install
+npm run build:lib      # the demo imports the library from dist/, so build it first
+npm run start          # http://localhost:4200 — press Ctrl+Shift+S for the overlay
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+While working on the library, run a second terminal with `npm run watch:lib` and the demo reloads with
+your changes.
 
-```bash
-ng generate --help
-```
+## Scripts
 
-## Building
+| Script                    | Description                                                              |
+| ------------------------- | ------------------------------------------------------------------------ |
+| `npm run build:lib`       | Production build of the library into `dist/vitalie/ngx-signal-devtools`. |
+| `npm run watch:lib`       | Development build in watch mode.                                         |
+| `npm run test:lib`        | Vitest + coverage for the library.                                       |
+| `npm run test:demo`       | Smoke tests for the showcase app.                                        |
+| `npm run test:all`        | Both suites (what CI runs).                                              |
+| `npm start`               | Serve the demo app.                                                      |
+| `npm run build:demo`      | Production build of the demo (shows the lazy overlay chunk).             |
+| `npm run lint`            | ESLint (angular-eslint).                                                 |
+| `npm run format`          | Prettier over the workspace.                                             |
+| `npm run probe:internals` | Verify the private `ɵSIGNAL` contract for the installed Angular version. |
+| `npm run pack:lib`        | Build + `npm pack` the library, then print the tarball contents.         |
+| `npm run release`         | Build, bump, changelog, tag and publish via release-it.                  |
 
-To build the project run:
+## Quality gates
 
-```bash
-ng build
-```
+- ESLint (angular-eslint, typescript-eslint) + Prettier.
+- Conventional Commits enforced by commitlint on `commit-msg`.
+- Vitest with coverage thresholds for the library.
+- CI: lint → library tests with coverage → library build → demo build, on every push and PR.
+- Release: `release-it` + GitHub Actions with npm provenance (no long-lived publish token).
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Before publishing (checklist)
 
-## Running unit tests
+1. Replace `YOUR_GH_USER` in `projects/ngx-signal-devtools/package.json` and in the README badges with
+   your GitHub handle, and update `author`/`funding`.
+2. If your npm scope is not `vitalie`, rename it everywhere: `grep -rl "@vitalie/ngx-signal-devtools" --exclude-dir=node_modules .`
+   and adjust `angular.json`, `tsconfig.json` paths and `projects/ngx-signal-devtools/package.json`.
+3. `npm login` (the local `~/.npmrc` token currently returns `401 Unauthorized`) and make sure the
+   scope exists on npm.
+4. Configure npm **Trusted Publishing** for the repo (or add `NPM_TOKEN` as a repository secret).
+5. Add screenshots/GIF of the overlay to `projects/ngx-signal-devtools/README.md` — the npm page
+   benefits the most from it.
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## License
 
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+MIT — see [LICENSE](./LICENSE).

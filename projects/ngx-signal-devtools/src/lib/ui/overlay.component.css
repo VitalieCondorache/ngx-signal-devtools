@@ -1,0 +1,340 @@
+/*
+ * Overlay styles. Encapsulation is disabled on the overlay component, therefore every rule is
+ * namespaced with `.sdt-` so nothing can leak into the host application.
+ */
+
+sdt-overlay-host {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2147483000;
+}
+
+.sdt-panel {
+  pointer-events: auto;
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  width: min(720px, calc(100vw - 32px));
+  max-height: min(70vh, 620px);
+  display: flex;
+  flex-direction: column;
+  background: #12141c;
+  color: #d7dbe7;
+  border: 1px solid #2a2f3f;
+  border-radius: 12px;
+  box-shadow: 0 18px 48px rgb(0 0 0 / 55%);
+  font:
+    12px/1.45 ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
+  overflow: hidden;
+}
+
+.sdt-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  background: linear-gradient(180deg, #1c2030, #171a26);
+  border-bottom: 1px solid #2a2f3f;
+  cursor: grab;
+  user-select: none;
+}
+
+.sdt-logo {
+  color: #7dd3fc;
+}
+
+.sdt-title {
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.sdt-stats {
+  display: flex;
+  gap: 10px;
+  color: #8b93a7;
+  font-size: 11px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.sdt-spacer {
+  flex: 1 1 auto;
+}
+
+.sdt-header button {
+  background: transparent;
+  border: 1px solid transparent;
+  color: #9aa3b8;
+  border-radius: 6px;
+  width: 24px;
+  height: 22px;
+  cursor: pointer;
+}
+
+.sdt-header button:hover {
+  background: #262c3d;
+  color: #e6eaf5;
+}
+
+.sdt-badge,
+.sdt-pill,
+.sdt-chip {
+  border-radius: 999px;
+  padding: 1px 7px;
+  background: #232838;
+  border: 1px solid #313749;
+  color: #a9b2c7;
+  font-size: 10px;
+}
+
+.sdt-badge-alert {
+  background: #3a1f22;
+  border-color: #6b2b30;
+  color: #ffb4b4;
+}
+
+.sdt-tabs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 6px;
+  background: #151824;
+  border-bottom: 1px solid #262b3a;
+}
+
+.sdt-tabs button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: #98a1b6;
+  padding: 3px 9px;
+  border-radius: 6px;
+  cursor: pointer;
+  font: inherit;
+}
+
+.sdt-tabs button.sdt-active {
+  background: #222839;
+  border-color: #384156;
+  color: #e8ecf7;
+}
+
+.sdt-body {
+  overflow: auto;
+  max-height: 52vh;
+}
+
+.sdt-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.sdt-table th {
+  position: sticky;
+  top: 0;
+  background: #161a26;
+  color: #7f889d;
+  font-weight: 500;
+  text-align: left;
+  padding: 5px 8px;
+  border-bottom: 1px solid #262b3a;
+}
+
+.sdt-table td {
+  padding: 4px 8px;
+  border-bottom: 1px solid #1d2230;
+  vertical-align: top;
+}
+
+.sdt-table tbody tr:hover {
+  background: #1a1f2d;
+}
+
+.sdt-table tr.sdt-selected {
+  background: #202839;
+}
+
+.sdt-table tr.sdt-destroyed {
+  opacity: 0.55;
+}
+
+.sdt-col-name {
+  max-width: 260px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sdt-kind {
+  color: #d7dbe7;
+}
+
+.sdt-kind-signal {
+  color: #7dd3fc;
+}
+
+.sdt-kind-computed {
+  color: #c4b5fd;
+}
+
+.sdt-kind-effect {
+  color: #fdba74;
+}
+
+.sdt-kind-tracked {
+  color: #86efac;
+}
+
+.sdt-value {
+  display: block;
+  color: #6f7890;
+  font-size: 10px;
+}
+
+.sdt-where {
+  color: #6f7890;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sdt-num {
+  text-align: right;
+  color: #9aa3b8;
+}
+
+.sdt-warn {
+  color: #fca5a5;
+}
+
+.sdt-empty {
+  padding: 22px 12px;
+  text-align: center;
+  color: #6f7890;
+}
+
+.sdt-events {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sdt-events li {
+  display: flex;
+  gap: 8px;
+  padding: 3px 8px;
+  border-bottom: 1px solid #1d2230;
+  align-items: baseline;
+}
+
+.sdt-time {
+  color: #6f7890;
+  min-width: 62px;
+}
+
+.sdt-ev {
+  min-width: 76px;
+  color: #9aa3b8;
+}
+
+.sdt-ev-write {
+  color: #7dd3fc;
+}
+
+.sdt-ev-recompute {
+  color: #c4b5fd;
+}
+
+.sdt-ev-noop-write {
+  color: #fdba74;
+}
+
+.sdt-ev-warning {
+  color: #fca5a5;
+}
+
+.sdt-ev-destroyed {
+  color: #f0abfc;
+}
+
+.sdt-ev-name {
+  color: #e8ecf7;
+}
+
+.sdt-ev-message {
+  color: #6f7890;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sdt-warnings {
+  padding: 8px;
+  display: grid;
+  gap: 8px;
+}
+
+.sdt-warning {
+  border: 1px solid #313749;
+  border-left-width: 3px;
+  border-radius: 8px;
+  padding: 8px 10px;
+  background: #161a26;
+}
+
+.sdt-warning header {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.sdt-warning p {
+  margin: 2px 0 0;
+}
+
+.sdt-sev-info {
+  border-left-color: #38bdf8;
+}
+
+.sdt-sev-warning {
+  border-left-color: #fbbf24;
+}
+
+.sdt-sev-error {
+  border-left-color: #f87171;
+}
+
+.sdt-code {
+  color: #a9b2c7;
+  background: #232838;
+  border-radius: 4px;
+  padding: 1px 6px;
+}
+
+.sdt-hint {
+  color: #6f7890;
+}
+
+.sdt-detail {
+  border-top: 1px solid #262b3a;
+  background: #141826;
+  padding: 6px 8px;
+  display: grid;
+  gap: 4px;
+}
+
+.sdt-detail-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}

@@ -1,0 +1,215 @@
+<div class="sdt-panel" [style.transform]="dragTransform()">
+  <header class="sdt-header" (mousedown)="startDrag($event)">
+    <span class="sdt-logo">◈</span>
+    <span class="sdt-title">ngx-signal-devtools</span>
+    <span class="sdt-stats">
+      <span title="tracked signals">{{ stats().tracked }} tracked</span>
+      <span title="live signals">{{ stats().live }} live</span>
+      <span title="recomputations">{{ stats().recomputations }} computed</span>
+      <span title="instrumented reads">{{ stats().reads }} reads</span>
+      <span title="writes">{{ stats().writes }} writes</span>
+    </span>
+    <span class="sdt-spacer"></span>
+    <span
+      class="sdt-badge"
+      [class.sdt-badge-alert]="totalWarnings() > 0"
+      [title]="totalWarnings() + ' diagnostics'"
+      >⚠ {{ totalWarnings() }}</span
+    >
+    <button
+      type="button"
+      (click)="togglePause()"
+      [title]="paused() ? 'Resume updates' : 'Freeze panel'"
+    >
+      {{ paused() ? '▶' : '⏸' }}
+    </button>
+    <button type="button" (click)="toggleCollapsed()" [title]="collapsed() ? 'Expand' : 'Collapse'">
+      {{ collapsed() ? '▲' : '▼' }}
+    </button>
+    <button type="button" (click)="devtools.clear()" title="Clear collected data">⌫</button>
+    <button type="button" (click)="devtools.download()" title="Export snapshot as JSON">⭳</button>
+    <button type="button" (click)="close()" title="Close (Esc)">✕</button>
+  </header>
+
+  @if (!collapsed()) {
+    <nav class="sdt-tabs">
+      @for (tab of tabs; track tab.id) {
+        <button type="button" [class.sdt-active]="panel() === tab.id" (click)="panel.set(tab.id)">
+          {{ tab.icon }} {{ tab.label }}
+          @if (tab.id === 'warnings' && totalWarnings() > 0) {
+            <span class="sdt-pill">{{ totalWarnings() }}</span>
+          }
+          @if (tab.id === 'signals') {
+            <span class="sdt-pill">{{ records().length }}</span>
+          }
+        </button>
+      }
+      <span class="sdt-spacer"></span>
+      @if (!stats().internalsAvailable) {
+        <span class="sdt-hint" title="Private reactive graph unavailable for this Angular version">
+          graph: manual
+        </span>
+      }
+    </nav>
+
+    <section class="sdt-body">
+      @switch (panel()) {
+        @case ('signals') {
+          <table class="sdt-table">
+            <thead>
+              <tr>
+                <th class="sdt-col-name">name</th>
+                <th>kind</th>
+                <th>where</th>
+                <th class="sdt-num">reads</th>
+                <th class="sdt-num">writes</th>
+                <th class="sdt-num">recomp.</th>
+                <th class="sdt-num">deps</th>
+                <th class="sdt-num">consumers</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (record of records(); track record.id) {
+                <tr
+                  [class.sdt-selected]="selectedId() === record.id"
+                  [class.sdt-destroyed]="record.destroyed"
+                  (click)="select(record)"
+                >
+                  <td class="sdt-col-name">
+                    <span class="sdt-kind sdt-kind-{{ record.kind }}">{{ record.name }}</span>
+                    @if (record.valuePreview) {
+                      <code class="sdt-value">{{ record.valuePreview }}</code>
+                    }
+                  </td>
+                  <td>{{ record.kind }}</td>
+                  <td class="sdt-where" [title]="record.owner ?? ''">
+                    {{ record.origin?.label ?? '—' }}
+                  </td>
+                  <td class="sdt-num">{{ record.reads }}</td>
+                  <td class="sdt-num" [class.sdt-warn]="record.writesWithoutChange > 0">
+                    {{ record.writes }}
+                    @if (record.writesWithoutChange > 0) {
+                      <span title="writes without a value change"
+                        >({{ record.writesWithoutChange }} no-op)</span
+                      >
+                    }
+                  </td>
+                  <td class="sdt-num">{{ record.recomputations }}</td>
+                  <td class="sdt-num">{{ effectiveDependencies(record) }}</td>
+                  <td class="sdt-num">{{ consumersLabel(record) }}</td>
+                </tr>
+              } @empty {
+                <tr>
+                  <td colspan="8" class="sdt-empty">
+                    No signals yet. Use <code>devSignal()</code>, <code>devComputed()</code>,
+                    <code>devEffect()</code> or <code>trackSignal()</code>.
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        }
+
+        @case ('events') {
+          <ol class="sdt-events">
+            @for (event of events(); track event.id) {
+              <li [class]="eventTone(event)">
+                <span class="sdt-time">{{ relativeTime(event.timestamp) }}</span>
+                <span class="sdt-ev">{{ event.type }}</span>
+                <span class="sdt-ev-name">{{ event.name }}</span>
+                <span class="sdt-ev-message">{{ event.message ?? event.valuePreview ?? '' }}</span>
+                @if (event.durationMs !== null) {
+                  <span class="sdt-time">{{ duration(event.durationMs) }}</span>
+                }
+              </li>
+            } @empty {
+              <li class="sdt-empty">No activity recorded yet.</li>
+            }
+          </ol>
+        }
+
+        @case ('warnings') {
+          <div class="sdt-warnings">
+            @for (warning of warnings(); track warning.id) {
+              <article class="sdt-warning" [class]="warningTone(warning)">
+                <header>
+                  <span class="sdt-code">{{ warning.code }}</span>
+                  @if (warning.name) {
+                    <span class="sdt-ev-name">{{ warning.name }}</span>
+                  }
+                  <span class="sdt-spacer"></span>
+                  @if (warning.count > 1) {
+                    <span class="sdt-pill">×{{ warning.count }}</span>
+                  }
+                </header>
+                <p>{{ warning.message }}</p>
+                @if (warning.hint) {
+                  <p class="sdt-hint">{{ warning.hint }}</p>
+                }
+              </article>
+            } @empty {
+              <p class="sdt-empty">
+                No diagnostics. Suspicious writes and lifetime issues appear here.
+              </p>
+            }
+          </div>
+        }
+
+        @case ('graph') {
+          <sdt-graph-view
+            [graph]="graph()"
+            [selectedId]="selectedId()"
+            (selected)="selectedId.set($event)"
+          />
+        }
+      }
+    </section>
+
+    @if (selected(); as record) {
+      <footer class="sdt-detail">
+        <div class="sdt-detail-row">
+          <strong>{{ record.name }}</strong>
+          <span class="sdt-badge">{{ record.kind }}</span>
+          @if (record.destroyed) {
+            <span class="sdt-badge sdt-badge-alert">destroyed</span>
+          }
+          @if (record.owner) {
+            <span class="sdt-hint">owner: {{ record.owner }}</span>
+          }
+          <span class="sdt-spacer"></span>
+          <span class="sdt-hint">{{ record.origin?.file ?? 'origin unknown' }}</span>
+        </div>
+        <div class="sdt-detail-row">
+          <span class="sdt-hint">deps ({{ record.dependenciesSource }}):</span>
+          @for (dependency of selectedDependencies(); track dependency) {
+            <span class="sdt-chip">{{ dependency }}</span>
+          } @empty {
+            <span class="sdt-hint">none</span>
+          }
+          <span class="sdt-spacer"></span>
+          <span class="sdt-hint">consumers:</span>
+          @for (consumer of selectedConsumers(); track consumer) {
+            <span class="sdt-chip">{{ consumer }}</span>
+          } @empty {
+            <span class="sdt-hint">none</span>
+          }
+        </div>
+        <div class="sdt-detail-row">
+          <span class="sdt-hint">
+            reads {{ record.reads }} · writes {{ record.writes }} ({{
+              record.writesWithoutChange
+            }}
+            no-op) · recomputes {{ record.recomputations }} · runs {{ record.effectRuns }} · last
+            {{ duration(record.lastDurationMs) || 'n/a' }}
+          </span>
+          @if (record.readAfterDestroy > 0 || record.writeAfterDestroy > 0) {
+            <span class="sdt-badge sdt-badge-alert">
+              after destroy: {{ record.readAfterDestroy }} reads /
+              {{ record.writeAfterDestroy }} writes
+            </span>
+          }
+        </div>
+      </footer>
+    }
+  }
+</div>

@@ -18,7 +18,7 @@ times per second, which effect tracks nothing, or which component keeps writing 
 been destroyed. This library makes that graph **visible inside the running application** and tells you
 when something looks like a bug.
 
-![The overlay](https://raw.githubusercontent.com/VitalieCondorache/ngx-signal-devtools/main/docs/images/overlay-preview.svg)
+![The overlay](https://raw.githubusercontent.com/VitalieCondorache/ngx-signal-devtools/main/docs/images/overlay-preview.png)
 
 ```
 +-- ngx-signal-devtools ------------- 14 tracked  12 live  1238 computed  9410 reads  3 warnings --+

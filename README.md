@@ -72,13 +72,13 @@ Full API tables, configuration and the diagnostics reference live in the
 
 ## Monorepo layout
 
-| Path                           | What it is                                                                                              |
-| ------------------------------ | ------------------------------------------------------------------------------------------------------- |
-| `projects/ngx-signal-devtools` | The published library (`ng-packagr`, single entry point + lazily loaded overlay chunk).                 |
-| `apps/demo`                    | Showcase app used as documentation and manual test bench (instrumented store, leak demo, no-op writes). |
-| `tools/probe-internals.mjs`    | Canary that prints the private reactive node shape of the installed Angular version.                    |
-| `docs/RELEASING.md`            | Maintainer guide: build outputs, npm authentication, provenance and the release checklist.              |
-| `docs/images`                  | README artwork: `banner.svg`, `overlay-preview.svg`, `social-preview.svg` (1280×640).                   |
+| Path                           | What it is                                                                                                             |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| `projects/ngx-signal-devtools` | The published library (`ng-packagr`, single entry point + lazily loaded overlay chunk).                                |
+| `apps/demo`                    | Showcase app used as documentation and manual test bench (instrumented store, leak demo, no-op writes).                |
+| `tools/probe-internals.mjs`    | Canary that prints the private reactive node shape of the installed Angular version.                                   |
+| `docs/RELEASING.md`            | Maintainer guide: build outputs, npm authentication, provenance and the release checklist.                             |
+| `docs/images`                  | README artwork and the GitHub social preview: `banner.svg`, `overlay-preview.svg`/`.png`, `social-preview.svg`/`.jpg`. |
 
 ## Development
 

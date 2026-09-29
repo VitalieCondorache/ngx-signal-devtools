@@ -95,9 +95,10 @@ your changes.
 | ------------------------- | ----------------------------------------------------------------------------- |
 | `npm run build:lib`       | Production build of the library into `dist/vitalie27dev/ngx-signal-devtools`. |
 | `npm run watch:lib`       | Development build in watch mode.                                              |
-| `npm run test:lib`        | Vitest + coverage for the library (57 tests, thresholds enforced).            |
+| `npm run test:lib`        | Vitest + coverage for the library (59 tests, thresholds enforced).            |
 | `npm run test:demo`       | Smoke tests for the showcase app.                                             |
-| `npm run test:all`        | Both suites — what CI runs.                                                   |
+| `npm run test:all`        | Both suites.                                                                  |
+| `npm run test:e2e`        | Builds both packages and boots the demo in headless Chromium (Playwright).    |
 | `npm start`               | Serve the demo app.                                                           |
 | `npm run build:demo`      | Production build of the demo (shows the lazy overlay chunk).                  |
 | `npm run lint`            | ESLint (angular-eslint).                                                      |

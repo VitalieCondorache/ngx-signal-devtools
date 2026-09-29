@@ -19,8 +19,13 @@ npm run lint
 npm run format:check
 npm run test:all
 npm run build:lib
-npm run probe:internals   # after an Angular upgrade
+npm run test:e2e            # boots the built demo in a real browser
+npm run probe:internals     # after an Angular upgrade
 ```
+
+`npm run test:e2e` is the only check that runs the optimised bundle in a browser, so it is the only
+one that can catch a devtool that keeps Angular's scheduler busy: unit tests drive change detection
+by hand and stay green while the real app never finishes booting.
 
 ## Conventions
 

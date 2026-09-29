@@ -141,6 +141,7 @@ provideSignalDevtools({
   warnOnNoDependencies: true,
   hotSignalThreshold: 120, // recomputations before a computed is flagged
   refreshIntervalMs: 500, // resampling while the overlay is open
+  notifyThrottleMs: 16, // minimum delay between two UI refreshes (0 notifies per microtask)
   globalKey: 'ngSignalDevtools', // console handle; `false` to disable
 });
 ```

@@ -15,14 +15,14 @@
     "developer-experience"
   ],
   "license": "MIT",
-  "author": "Vitalie",
-  "homepage": "https://github.com/YOUR_GH_USER/ngx-signal-devtools#readme",
+  "author": "Vitalie Condorache",
+  "homepage": "https://github.com/VitalieCondorache/ngx-signal-devtools#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/YOUR_GH_USER/ngx-signal-devtools.git"
+    "url": "git+https://github.com/VitalieCondorache/ngx-signal-devtools.git"
   },
   "bugs": {
-    "url": "https://github.com/YOUR_GH_USER/ngx-signal-devtools/issues"
+    "url": "https://github.com/VitalieCondorache/ngx-signal-devtools/issues"
   },
   "peerDependencies": {
     "@angular/common": "^22.0.0",
@@ -35,9 +35,5 @@
   "publishConfig": {
     "access": "public",
     "provenance": true
-  },
-  "funding": {
-    "type": "github",
-    "url": "https://github.com/sponsors/YOUR_GH_USER"
   }
 }

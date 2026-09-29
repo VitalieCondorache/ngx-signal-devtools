@@ -21,4 +21,4 @@ All notable changes to this project are documented here. The format follows
 - `layoutSignalGraph()` layered SVG layout for custom UIs, plus `snapshot()`/`download()` JSON export.
 - Showcase app with an instrumented store, leak demo and no-op write demo.
 
-[0.1.0]: https://github.com/YOUR_GH_USER/ngx-signal-devtools/releases/tag/v0.1.0
+[0.1.0]: https://github.com/VitalieCondorache/ngx-signal-devtools/releases/tag/v0.1.0

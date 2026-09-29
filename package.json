@@ -4,7 +4,15 @@
   "description": "Workspace for @vitalie/ngx-signal-devtools — a dev-only overlay for Angular signals.",
   "private": true,
   "license": "MIT",
-  "author": "Vitalie",
+  "author": "Vitalie Condorache",
+  "homepage": "https://github.com/VitalieCondorache/ngx-signal-devtools#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VitalieCondorache/ngx-signal-devtools.git"
+  },
+  "bugs": {
+    "url": "https://github.com/VitalieCondorache/ngx-signal-devtools/issues"
+  },
   "packageManager": "npm@11.13.0",
   "engines": {
     "node": ">=20.19.0"

@@ -5,7 +5,7 @@
 
 [![npm version](https://img.shields.io/npm/v/@vitalie/ngx-signal-devtools.svg)](https://www.npmjs.com/package/@vitalie/ngx-signal-devtools)
 [![npm downloads](https://img.shields.io/npm/dm/@vitalie/ngx-signal-devtools.svg)](https://www.npmjs.com/package/@vitalie/ngx-signal-devtools)
-[![CI](https://github.com/YOUR_GH_USER/ngx-signal-devtools/actions/workflows/ci.yml/badge.svg)](https://github.com/YOUR_GH_USER/ngx-signal-devtools/actions/workflows/ci.yml)
+[![CI](https://github.com/VitalieCondorache/ngx-signal-devtools/actions/workflows/ci.yml/badge.svg)](https://github.com/VitalieCondorache/ngx-signal-devtools/actions/workflows/ci.yml)
 [![license](https://img.shields.io/npm/l/@vitalie/ngx-signal-devtools.svg)](./LICENSE)
 
 Angular's signal graph is invisible while you develop: you cannot see which computed recomputes 400

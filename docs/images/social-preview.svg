@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640" role="img" aria-label="ngx-signal-devtools — dev-only overlay for Angular signals">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b0e15" />
+      <stop offset="60%" stop-color="#131722" />
+      <stop offset="100%" stop-color="#1d2231" />
+    </linearGradient>
+    <radialGradient id="glow" cx="0.2" cy="0.0" r="0.9">
+      <stop offset="0%" stop-color="#4f46e5" stop-opacity="0.45" />
+      <stop offset="100%" stop-color="#4f46e5" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="glow2" cx="0.9" cy="1.0" r="0.8">
+      <stop offset="0%" stop-color="#0ea5e9" stop-opacity="0.28" />
+      <stop offset="100%" stop-color="#0ea5e9" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <rect width="1280" height="640" fill="url(#bg)" />
+  <rect width="1280" height="640" fill="url(#glow)" />
+  <rect width="1280" height="640" fill="url(#glow2)" />
+  <rect x="0.5" y="0.5" width="1279" height="639" fill="none" stroke="#2a2f3f" />
+
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" text-anchor="middle">
+    <polygon points="640,86 662,108 640,130 618,108" fill="#7dd3fc" />
+
+    <text x="640" y="186" fill="#9aa3b8" font-size="17" letter-spacing="4">SIGNAL DEVTOOLS FOR ANGULAR</text>
+
+    <text x="640" y="286" fill="#f4f6fb" font-size="66" font-weight="700">ngx-signal-devtools</text>
+
+    <text x="640" y="348" fill="#7dd3fc" font-size="24">dependency graph · recomputation counters · leak detection</text>
+    <text x="640" y="386" fill="#8b93a7" font-size="19">Dev-only overlay for your running app. Zero production cost.</text>
+
+    <g transform="translate(324, 440)">
+      <rect width="212" height="34" rx="17" fill="#1b2130" stroke="#313749" />
+      <text x="106" y="22" fill="#a9b2c7" font-size="14">zero production cost</text>
+      <rect x="224" width="196" height="34" rx="17" fill="#1b2130" stroke="#313749" />
+      <text x="322" y="22" fill="#a9b2c7" font-size="14">Angular 22 · zoneless</text>
+      <rect x="432" width="200" height="34" rx="17" fill="#1b2130" stroke="#313749" />
+      <text x="532" y="22" fill="#a9b2c7" font-size="14">MIT · 18 kB lazy chunk</text>
+    </g>
+
+    <text x="640" y="536" fill="#6f7890" font-size="18">npm i -D @vitalie27dev/ngx-signal-devtools</text>
+    <text x="640" y="578" fill="#4b5468" font-size="15">github.com/VitalieCondorache/ngx-signal-devtools</text>
+  </g>
+</svg>

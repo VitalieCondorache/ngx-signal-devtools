@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📦 npm package
+    url: https://www.npmjs.com/package/@vitalie27dev/ngx-signal-devtools
+    about: Install the latest version, read the API reference and check the published changelog.
+  - name: 📖 Library documentation
+    url: https://github.com/VitalieCondorache/ngx-signal-devtools/blob/main/projects/ngx-signal-devtools/README.md
+    about: Configuration, diagnostics reference, compatibility and limitations.
+  - name: 🎮 Showcase app
+    url: https://github.com/VitalieCondorache/ngx-signal-devtools/tree/main/apps/demo
+    about: The demo used as a manual test bench — instrumented store, leak demo, no-op writes.
+  - name: 💬 Questions and ideas
+    url: https://github.com/VitalieCondorache/ngx-signal-devtools/discussions
+    about: Ask how to instrument something, or suggest a new diagnostic.

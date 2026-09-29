@@ -3,15 +3,22 @@
 > Dev-only overlay for Angular signals: **dependency graph**, **recomputation counters** and
 > **leak detection** — with zero production cost.
 
-[![npm version](https://img.shields.io/npm/v/@vitalie27dev/ngx-signal-devtools.svg)](https://www.npmjs.com/package/@vitalie27dev/ngx-signal-devtools)
+[![npm version](https://img.shields.io/npm/v/@vitalie27dev/ngx-signal-devtools.svg?color=CB3837)](https://www.npmjs.com/package/@vitalie27dev/ngx-signal-devtools)
 [![npm downloads](https://img.shields.io/npm/dm/@vitalie27dev/ngx-signal-devtools.svg)](https://www.npmjs.com/package/@vitalie27dev/ngx-signal-devtools)
 [![CI](https://github.com/VitalieCondorache/ngx-signal-devtools/actions/workflows/ci.yml/badge.svg)](https://github.com/VitalieCondorache/ngx-signal-devtools/actions/workflows/ci.yml)
 [![license](https://img.shields.io/npm/l/@vitalie27dev/ngx-signal-devtools.svg)](./LICENSE)
+
+[**GitHub repository**](https://github.com/VitalieCondorache/ngx-signal-devtools) &nbsp;·&nbsp;
+[**showcase app**](https://github.com/VitalieCondorache/ngx-signal-devtools/tree/main/apps/demo)
+&nbsp;·&nbsp; [**CHANGELOG**](./CHANGELOG.md) &nbsp;·&nbsp;
+[**issues**](https://github.com/VitalieCondorache/ngx-signal-devtools/issues)
 
 Angular's signal graph is invisible while you develop: you cannot see which computed recomputes 400
 times per second, which effect tracks nothing, or which component keeps writing a signal after it has
 been destroyed. This library makes that graph **visible inside the running application** and tells you
 when something looks like a bug.
+
+![The overlay](https://raw.githubusercontent.com/VitalieCondorache/ngx-signal-devtools/main/docs/images/overlay-preview.svg)
 
 ```
 +-- ngx-signal-devtools ------------- 14 tracked  12 live  1238 computed  9410 reads  3 warnings --+

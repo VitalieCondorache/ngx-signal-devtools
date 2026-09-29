@@ -1,6 +1,6 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { provideSignalDevtools } from '@vitalie/ngx-signal-devtools';
+import { provideSignalDevtools } from '@vitalie27dev/ngx-signal-devtools';
 
 import { routes } from './app.routes';
 

@@ -74,7 +74,7 @@
         }
       }
     },
-    "@vitalie/ngx-signal-devtools": {
+    "@vitalie27dev/ngx-signal-devtools": {
       "projectType": "library",
       "root": "projects/ngx-signal-devtools",
       "sourceRoot": "projects/ngx-signal-devtools/src",

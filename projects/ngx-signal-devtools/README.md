@@ -1,12 +1,12 @@
-# @vitalie/ngx-signal-devtools
+# @vitalie27dev/ngx-signal-devtools
 
 > Dev-only overlay for Angular signals: **dependency graph**, **recomputation counters** and
 > **leak detection** — with zero production cost.
 
-[![npm version](https://img.shields.io/npm/v/@vitalie/ngx-signal-devtools.svg)](https://www.npmjs.com/package/@vitalie/ngx-signal-devtools)
-[![npm downloads](https://img.shields.io/npm/dm/@vitalie/ngx-signal-devtools.svg)](https://www.npmjs.com/package/@vitalie/ngx-signal-devtools)
+[![npm version](https://img.shields.io/npm/v/@vitalie27dev/ngx-signal-devtools.svg)](https://www.npmjs.com/package/@vitalie27dev/ngx-signal-devtools)
+[![npm downloads](https://img.shields.io/npm/dm/@vitalie27dev/ngx-signal-devtools.svg)](https://www.npmjs.com/package/@vitalie27dev/ngx-signal-devtools)
 [![CI](https://github.com/VitalieCondorache/ngx-signal-devtools/actions/workflows/ci.yml/badge.svg)](https://github.com/VitalieCondorache/ngx-signal-devtools/actions/workflows/ci.yml)
-[![license](https://img.shields.io/npm/l/@vitalie/ngx-signal-devtools.svg)](./LICENSE)
+[![license](https://img.shields.io/npm/l/@vitalie27dev/ngx-signal-devtools.svg)](./LICENSE)
 
 Angular's signal graph is invisible while you develop: you cannot see which computed recomputes 400
 times per second, which effect tracks nothing, or which component keeps writing a signal after it has
@@ -44,13 +44,13 @@ when something looks like a bug.
 ## Installation
 
 ```bash
-npm install --save-dev @vitalie/ngx-signal-devtools
+npm install --save-dev @vitalie27dev/ngx-signal-devtools
 ```
 
 ```ts
 // app.config.ts
 import { ApplicationConfig } from '@angular/core';
-import { provideSignalDevtools } from '@vitalie/ngx-signal-devtools';
+import { provideSignalDevtools } from '@vitalie27dev/ngx-signal-devtools';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -75,7 +75,7 @@ export class DebugBar {
 
 ```ts
 import { Component } from '@angular/core';
-import { devComputed, devEffect, devSignal } from '@vitalie/ngx-signal-devtools';
+import { devComputed, devEffect, devSignal } from '@vitalie27dev/ngx-signal-devtools';
 
 @Component({
   selector: 'app-cart',
@@ -233,7 +233,7 @@ visible through `trackSignal()`.
 
 ## Roadmap
 
-- [ ] Secondary entry point `@vitalie/ngx-signal-devtools/testing` with `expectNoSignalLeaks()`.
+- [ ] Secondary entry point `@vitalie27dev/ngx-signal-devtools/testing` with `expectNoSignalLeaks()`.
 - [ ] Custom reporters (`console`, `benchmark`, CI artifacts).
 - [ ] CI matrix that validates and widens the Angular peer range (21.x).
 - [ ] Record/replay of signal activity to diff two interactions.

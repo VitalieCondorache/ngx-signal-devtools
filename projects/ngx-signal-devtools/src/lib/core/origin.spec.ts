@@ -4,7 +4,7 @@ describe('parseSignalOrigin', () => {
   it('picks the first user frame and skips devtools and framework frames', () => {
     const stack = [
       'Error: ngx-signal-devtools',
-      '    at captureSignalOrigin (http://localhost:4200/node_modules/@vitalie/ngx-signal-devtools/fesm2022/x.mjs:12:5)',
+      '    at captureSignalOrigin (http://localhost:4200/node_modules/@vitalie27dev/ngx-signal-devtools/fesm2022/x.mjs:12:5)',
       '    at devSignal (http://localhost:4200/node_modules/@angular/core/fesm2022/core.mjs:10:5)',
       '    at new TodosStore (http://localhost:4200/src/app/todos.store.ts:42:18)',
       '    at new App (http://localhost:4200/src/app/app.ts:8:9)',

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, inject, input } from '@angular/core';
-import { devSignal } from '@vitalie/ngx-signal-devtools';
+import { devSignal } from '@vitalie27dev/ngx-signal-devtools';
 import { LeakPool } from './leak-pool';
 
 /**

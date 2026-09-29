@@ -1,11 +1,11 @@
 # Releasing
 
-Maintainer documentation for publishing `@vitalie/ngx-signal-devtools`. Nothing here is required to
+Maintainer documentation for publishing `@vitalie27dev/ngx-signal-devtools`. Nothing here is required to
 **use** the library — see the [library README](../projects/ngx-signal-devtools/README.md) for that.
 
 ## What gets published
 
-Only `dist/vitalie/ngx-signal-devtools` is published. `ng-packagr` produces the Angular Package
+Only `dist/vitalie27dev/ngx-signal-devtools` is published. `ng-packagr` produces the Angular Package
 Format output and copies `README.md`, `LICENSE` and the `assets` listed in `ng-package.json`
 (`CHANGELOG.md`) into it, merged with the metadata of
 `projects/ngx-signal-devtools/package.json`.
@@ -19,15 +19,16 @@ Expected contents: `fesm2022/*.mjs` (main entry + lazily loaded overlay chunk), 
 
 ## Published name and scope
 
-The package name is `@vitalie/ngx-signal-devtools`; the npm account publishing it must own that scope
-(an npm user or an organisation named `vitalie`).
+The package name is `@vitalie27dev/ngx-signal-devtools`. npm requires the publishing account to own
+that scope, and the scope is the npm account name: `npm whoami` must print `vitalie27dev` (or an
+organisation with the same name must exist and include the account).
 
-If the scope ever has to change, rename it consistently and rebuild:
+If the account ever changes, rename the scope consistently and rebuild:
 
 ```bash
-grep -rl "@vitalie/ngx-signal-devtools" --exclude-dir=node_modules .
+grep -rl "@vitalie27dev/ngx-signal-devtools" --exclude-dir=node_modules .
 # angular.json (project name), tsconfig.json (paths), projects/ngx-signal-devtools/package.json,
-# apps/demo/src/app/**, spec files
+# apps/demo/src/app/**, spec files, docs
 npm run test:all && npm run build:lib && npm run build:demo
 ```
 
@@ -39,7 +40,7 @@ Local publishing:
 npm login
 npm whoami              # must print the npm account that owns the scope
 npm run build:lib
-cd dist/vitalie/ngx-signal-devtools && npm publish --access public --provenance
+cd dist/vitalie27dev/ngx-signal-devtools && npm publish --access public --provenance
 ```
 
 `--access public` is required for scoped packages, and `--provenance` attaches a signed
@@ -75,8 +76,8 @@ To rehearse without publishing: Actions → `Release` → _Run workflow_ with `d
 ## After the release
 
 - Confirm on npmjs.com that the version, README and provenance badge look right.
-- `npm view @vitalie/ngx-signal-devtools` — check `dist.tarball`, `peerDependencies` and `keywords`.
-- Install the freshly published version in a scratch app (`npm i @vitalie/ngx-signal-devtools@latest`)
+- `npm view @vitalie27dev/ngx-signal-devtools` — check `dist.tarball`, `peerDependencies` and `keywords`.
+- Install the freshly published version in a scratch app (`npm i @vitalie27dev/ngx-signal-devtools@latest`)
   and open the overlay once.
 - Keep the repository _About_ description, topics and the demo URL (GitHub Pages) up to date.
 

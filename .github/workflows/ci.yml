@@ -55,4 +55,4 @@ jobs:
         run: npm run build:demo
 
       - name: Inspect the published artefact
-        run: cd dist/vitalie/ngx-signal-devtools && npm pack --dry-run
+        run: cd dist/vitalie27dev/ngx-signal-devtools && npm pack --dry-run

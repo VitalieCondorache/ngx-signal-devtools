@@ -1,6 +1,6 @@
 # ngx-signal-devtools — monorepo
 
-Workspace for the **[@vitalie/ngx-signal-devtools](projects/ngx-signal-devtools)** library: a dev-only
+Workspace for the **[@vitalie27dev/ngx-signal-devtools](projects/ngx-signal-devtools)** library: a dev-only
 overlay that shows the Angular signal graph, recomputation counters and leaked signals, with zero
 production cost.
 
@@ -24,20 +24,20 @@ your changes.
 
 ## Scripts
 
-| Script                    | Description                                                              |
-| ------------------------- | ------------------------------------------------------------------------ |
-| `npm run build:lib`       | Production build of the library into `dist/vitalie/ngx-signal-devtools`. |
-| `npm run watch:lib`       | Development build in watch mode.                                         |
-| `npm run test:lib`        | Vitest + coverage for the library.                                       |
-| `npm run test:demo`       | Smoke tests for the showcase app.                                        |
-| `npm run test:all`        | Both suites (what CI runs).                                              |
-| `npm start`               | Serve the demo app.                                                      |
-| `npm run build:demo`      | Production build of the demo (shows the lazy overlay chunk).             |
-| `npm run lint`            | ESLint (angular-eslint).                                                 |
-| `npm run format`          | Prettier over the workspace.                                             |
-| `npm run probe:internals` | Verify the private `ɵSIGNAL` contract for the installed Angular version. |
-| `npm run pack:lib`        | Build + `npm pack` the library, then print the tarball contents.         |
-| `npm run release`         | Build, bump, changelog, tag and publish via release-it.                  |
+| Script                    | Description                                                                   |
+| ------------------------- | ----------------------------------------------------------------------------- |
+| `npm run build:lib`       | Production build of the library into `dist/vitalie27dev/ngx-signal-devtools`. |
+| `npm run watch:lib`       | Development build in watch mode.                                              |
+| `npm run test:lib`        | Vitest + coverage for the library.                                            |
+| `npm run test:demo`       | Smoke tests for the showcase app.                                             |
+| `npm run test:all`        | Both suites (what CI runs).                                                   |
+| `npm start`               | Serve the demo app.                                                           |
+| `npm run build:demo`      | Production build of the demo (shows the lazy overlay chunk).                  |
+| `npm run lint`            | ESLint (angular-eslint).                                                      |
+| `npm run format`          | Prettier over the workspace.                                                  |
+| `npm run probe:internals` | Verify the private `ɵSIGNAL` contract for the installed Angular version.      |
+| `npm run pack:lib`        | Build + `npm pack` the library, then print the tarball contents.              |
+| `npm run release`         | Build, bump, changelog, tag and publish via release-it.                       |
 
 ## Quality gates
 
@@ -49,7 +49,7 @@ your changes.
 
 ## Releasing
 
-The library is published from `dist/vitalie/ngx-signal-devtools` as `@vitalie/ngx-signal-devtools`
+The library is published from `dist/vitalie27dev/ngx-signal-devtools` as `@vitalie27dev/ngx-signal-devtools`
 (MIT). Build, authentication, provenance and the maintainer checklist are documented in
 [docs/RELEASING.md](docs/RELEASING.md).
 

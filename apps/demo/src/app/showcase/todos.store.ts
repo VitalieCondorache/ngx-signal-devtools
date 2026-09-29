@@ -1,6 +1,6 @@
 import { Injectable, computed, effect, inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { devComputed, devEffect, devSignal, trackSignal } from '@vitalie/ngx-signal-devtools';
+import { devComputed, devEffect, devSignal, trackSignal } from '@vitalie27dev/ngx-signal-devtools';
 
 export interface Todo {
   readonly id: number;
@@ -22,7 +22,7 @@ export class TodosStore {
   /** Instrumented writable signal: reads, writes and no-op writes are counted. */
   readonly todos = devSignal<Todo[]>(
     [
-      { id: 1, title: 'Install @vitalie/ngx-signal-devtools', done: true },
+      { id: 1, title: 'Install @vitalie27dev/ngx-signal-devtools', done: true },
       { id: 2, title: 'Open the overlay with Ctrl + Shift + S', done: false },
     ],
     { name: 'todos' },

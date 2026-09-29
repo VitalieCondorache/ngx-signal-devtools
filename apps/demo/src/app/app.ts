@@ -4,7 +4,7 @@ import {
   devSignal,
   injectSignalDevtools,
   isInternalsAvailable,
-} from '@vitalie/ngx-signal-devtools';
+} from '@vitalie27dev/ngx-signal-devtools';
 import { LeakyWidget } from './showcase/leaky-widget';
 import { LeakPool } from './showcase/leak-pool';
 import { TodosStore, type TodoFilter } from './showcase/todos.store';

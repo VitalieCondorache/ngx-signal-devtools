@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { provideSignalDevtools } from '@vitalie/ngx-signal-devtools';
+import { provideSignalDevtools } from '@vitalie27dev/ngx-signal-devtools';
 import { App } from './app';
 
 describe('App (demo showcase)', () => {
@@ -33,7 +33,7 @@ describe('App (demo showcase)', () => {
 
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelectorAll('.todos li').length).toBeGreaterThan(0);
-    expect(compiled.textContent).toContain('Install @vitalie/ngx-signal-devtools');
+    expect(compiled.textContent).toContain('Install @vitalie27dev/ngx-signal-devtools');
   });
 
   it('should add a todo through the instrumented draft signal', async () => {

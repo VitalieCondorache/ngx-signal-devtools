@@ -4,7 +4,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "@vitalie/ngx-signal-devtools": ["./dist/vitalie/ngx-signal-devtools"]
+      "@vitalie27dev/ngx-signal-devtools": ["./dist/vitalie27dev/ngx-signal-devtools"]
     },
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,

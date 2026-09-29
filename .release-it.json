@@ -19,7 +19,7 @@
   },
   "npm": {
     "publish": true,
-    "publishPath": "dist/vitalie/ngx-signal-devtools",
+    "publishPath": "dist/vitalie27dev/ngx-signal-devtools",
     "publishArgs": ["--provenance", "--access", "public"]
   },
   "plugins": {

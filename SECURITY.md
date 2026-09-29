@@ -2,7 +2,7 @@
 
 ## Supported versions
 
-Only the latest published minor of `@vitalie/ngx-signal-devtools` is supported.
+Only the latest published minor of `@vitalie27dev/ngx-signal-devtools` is supported.
 
 ## Scope
 

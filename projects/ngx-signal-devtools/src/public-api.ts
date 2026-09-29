@@ -1,5 +1,5 @@
 /*
- * Public API Surface of @vitalie/ngx-signal-devtools
+ * Public API Surface of @vitalie27dev/ngx-signal-devtools
  */
 
 export { provideSignalDevtools, injectSignalDevtools } from './lib/provide-signal-devtools';

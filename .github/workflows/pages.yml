@@ -1,9 +1,12 @@
 name: Demo (GitHub Pages)
 
+# Runs manually on purpose: enable Pages first (Settings -> Pages -> Source: GitHub Actions),
+# then run this workflow from the Actions tab. Uncomment the `push` trigger afterwards to deploy
+# the demo on every push to main.
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
+  # push:
+  #   branches: [main]
 
 permissions:
   contents: read

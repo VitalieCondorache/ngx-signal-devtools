@@ -9,6 +9,7 @@ production cost.
 | `projects/ngx-signal-devtools` | The published library (`ng-packagr`, single entry point + lazy UI chunk).                               |
 | `apps/demo`                    | Showcase app used as documentation and manual test bench (instrumented store, leak demo, no-op writes). |
 | `tools/probe-internals.mjs`    | Canary that prints the private reactive node shape of the installed Angular version.                    |
+| `docs/RELEASING.md`            | Maintainer guide: build outputs, npm authentication, provenance and the release checklist.              |
 
 ## Getting started
 
@@ -46,24 +47,11 @@ your changes.
 - CI: lint → library tests with coverage → library build → demo build, on every push and PR.
 - Release: `release-it` + GitHub Actions with npm provenance (no long-lived publish token).
 
-## Before publishing (checklist)
+## Releasing
 
-1. **npm scope** — the library is published as `@vitalie/ngx-signal-devtools`. If your npm user/org is
-   not `vitalie`, rename it everywhere:
-   `grep -rl "@vitalie/ngx-signal-devtools" --exclude-dir=node_modules .` (files: `angular.json`,
-   `tsconfig.json`, `projects/ngx-signal-devtools/package.json`, `apps/demo/src/app/**`, specs).
-2. **npm login** — the local `~/.npmrc` token currently returns `401 Unauthorized`. Run `npm login`
-   and make sure the scope exists on npm (`npm whoami` must answer).
-3. **Trusted publishing** — configure npm Trusted Publishing for this repository (Settings → Actions →
-   Read and write permissions is only needed for the release commit/tag), or add `NPM_TOKEN` as a
-   repository secret.
-4. **GitHub Pages** — enable _Settings → Pages → Source: GitHub Actions_, then run the
-   `Demo (GitHub Pages)` workflow to publish `https://vitaliecondorache.github.io/ngx-signal-devtools/`
-   and add that URL to the repository's _About → Website_.
-5. **Visuals** — add a screenshot/GIF of the overlay to `projects/ngx-signal-devtools/README.md` (the
-   npm page benefits the most from it) and set the repo social preview (1280×640).
-6. **Optional** — re-add a `funding` field in `projects/ngx-signal-devtools/package.json` once GitHub
-   Sponsors is enabled.
+The library is published from `dist/vitalie/ngx-signal-devtools` as `@vitalie/ngx-signal-devtools`
+(MIT). Build, authentication, provenance and the maintainer checklist are documented in
+[docs/RELEASING.md](docs/RELEASING.md).
 
 ## License
 

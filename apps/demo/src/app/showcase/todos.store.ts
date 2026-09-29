@@ -102,9 +102,9 @@ export class TodosStore {
     this.todos.update((todos) => todos.filter((todo) => todo.id !== id));
   }
 
-  /** Writes an equal array instance: the devtools reports it as a no-op write. */
+  /** Writes the same array instance back: Angular ignores it and the devtools reports a no-op write. */
   writeSameValue(): void {
-    this.todos.set([...this.todos()]);
+    this.todos.set(this.todos());
   }
 
   stopPersisting(): void {

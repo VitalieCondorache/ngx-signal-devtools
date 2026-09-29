@@ -202,6 +202,11 @@ export interface SignalDevtoolsConfig {
   readonly maxEvents?: number;
   /** Maximum number of deduplicated diagnostics. Defaults to `100`. */
   readonly maxWarnings?: number;
+  /**
+   * Minimum delay (ms) between two UI refreshes. Defaults to `16`, which keeps the overlay
+   * responsive while making it impossible for notifications to keep change detection alive.
+   */
+  readonly notifyThrottleMs?: number;
   /** Corner used when the overlay is first opened. Defaults to `bottom-right`. */
   readonly position?: 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left';
   /** Reports writes that do not change the value. Defaults to `true`. */

@@ -11,6 +11,7 @@ function createRegistry(overrides: Partial<NormalizedConfig> = {}): SignalDevtoo
     warnOnNoopWrite: true,
     warnOnNoDependencies: true,
     hotSignalThreshold: 2,
+    notifyThrottleMs: 0,
     ...overrides,
   });
 }
@@ -245,5 +246,35 @@ describe('SignalDevtoolsRegistry state', () => {
     expect(snapshot).toHaveProperty('dependenciesSource');
     expect(registry.findRecord(record.id)).toBe(record);
     expect(registry.getRecords()).toHaveLength(1);
+  });
+});
+
+describe('SignalDevtoolsRegistry notifications', () => {
+  it('never notifies for reads, so a template cannot keep change detection alive', async () => {
+    const registry = createRegistry({ captureReads: true });
+    const record = createSignalRecord(registry);
+    let calls = 0;
+    registry.subscribe(() => calls++);
+
+    registry.noteRead(record);
+    registry.noteRead(record);
+    await Promise.resolve();
+
+    expect(calls).toBe(0);
+    expect(record.reads).toBe(2);
+    expect(registry.effectRunReads).toBe(2);
+  });
+
+  it('throttles notifications when a delay is configured', async () => {
+    const registry = createRegistry({ notifyThrottleMs: 20 });
+    const record = createSignalRecord(registry);
+    let calls = 0;
+    registry.subscribe(() => calls++);
+
+    registry.noteWrite(record, true, 1);
+    registry.noteWrite(record, true, 2);
+    await new Promise((resolve) => setTimeout(resolve, 60));
+
+    expect(calls).toBe(1);
   });
 });

@@ -79,7 +79,7 @@ describe('SdtOverlayComponent', () => {
   it('shows diagnostics with severity and hint', async () => {
     const { fixture, counter } = setup();
     counter.set(1); // equal value: recorded as a no-op write
-    await Promise.resolve(); // notifications are coalesced per microtask
+    await new Promise((resolve) => setTimeout(resolve, 40)); // notifications are throttled
     fixture.detectChanges();
 
     clickTab(fixture, 'Warnings');

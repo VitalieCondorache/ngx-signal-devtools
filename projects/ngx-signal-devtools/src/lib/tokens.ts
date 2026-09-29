@@ -35,6 +35,7 @@ export function resolveConfig(config: SignalDevtoolsConfig = {}): ResolvedConfig
     warnOnNoopWrite: config.warnOnNoopWrite ?? true,
     warnOnNoDependencies: config.warnOnNoDependencies ?? true,
     hotSignalThreshold: config.hotSignalThreshold ?? 120,
+    notifyThrottleMs: config.notifyThrottleMs ?? 16,
     hotkey: config.hotkey === undefined ? 'ctrl+shift+s' : config.hotkey,
     position: config.position ?? 'bottom-right',
     refreshIntervalMs: config.refreshIntervalMs ?? 500,

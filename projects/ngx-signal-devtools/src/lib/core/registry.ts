@@ -32,6 +32,12 @@ export interface NormalizedConfig {
   readonly warnOnNoopWrite: boolean;
   readonly warnOnNoDependencies: boolean;
   readonly hotSignalThreshold: number;
+  /**
+   * Minimum delay between two UI notifications. Notifications are a devtool concern and must never
+   * be able to keep a change detection cycle alive: throttling them bounds any pathological loop to
+   * a few updates per second instead of freezing the page. `0` notifies once per microtask.
+   */
+  readonly notifyThrottleMs: number;
 }
 
 export interface CreateRecordInit {
@@ -191,7 +197,10 @@ export class SignalDevtoolsRegistry {
     if (this.config.captureReads) {
       this.pushEvent('read', record);
     }
-    this.notify();
+
+    // Reads happen while a template or a computed is being evaluated, so they must never notify:
+    // notifying would bump the revision signal, schedule another change detection pass, read the
+    // same signals again and spin forever. The counters are picked up by the refresh loop instead.
   }
 
   noteWrite(record: TrackedSignal, changed: boolean, value?: unknown): void {
@@ -601,7 +610,7 @@ export class SignalDevtoolsRegistry {
     });
   }
 
-  /** Coalesces notifications within the current task so hot loops cannot thrash the UI. */
+  /** Coalesces notifications so hot loops cannot thrash the UI, and throttles them when configured. */
   private notify(): void {
     if (this.notifyScheduled || this.listeners.size === 0) {
       return;
@@ -617,6 +626,11 @@ export class SignalDevtoolsRegistry {
         }
       }
     };
+
+    if (this.config.notifyThrottleMs > 0) {
+      setTimeout(run, this.config.notifyThrottleMs);
+      return;
+    }
     if (typeof queueMicrotask === 'function') {
       queueMicrotask(run);
     } else {

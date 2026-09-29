@@ -1,0 +1,62 @@
+name: Bug report
+description: Something behaves differently than documented
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. A devtools snapshot helps a lot:
+        `ngSignalDevtools.snapshot()` (or the export button) — please review it before attaching.
+  - type: input
+    id: library-version
+    attributes:
+      label: ngx-signal-devtools version
+      placeholder: 0.1.0
+    validations:
+      required: true
+  - type: input
+    id: angular-version
+    attributes:
+      label: Angular version
+      placeholder: 22.2.0
+    validations:
+      required: true
+  - type: dropdown
+    id: entry-point
+    attributes:
+      label: Which API is involved?
+      multiple: true
+      options:
+        - provideSignalDevtools / injectSignalDevtools
+        - devSignal
+        - devComputed
+        - devEffect
+        - trackSignal
+        - overlay UI
+        - dependency graph
+        - diagnostics
+        - other
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behaviour
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: A StackBlitz link, a repository or a small code block.
+    validations:
+      required: true
+  - type: textarea
+    id: snapshot
+    attributes:
+      label: Snapshot (optional)
+      render: json

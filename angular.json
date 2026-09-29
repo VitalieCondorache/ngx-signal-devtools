@@ -6,5 +6,117 @@
   },
   "newProjectRoot": "projects",
   "projects": {
+    "demo": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "apps/demo",
+      "sourceRoot": "apps/demo/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "apps/demo/src/main.ts",
+            "tsConfig": "apps/demo/tsconfig.app.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "apps/demo/public"
+              }
+            ],
+            "styles": ["apps/demo/src/styles.css"]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "demo:build:production"
+            },
+            "development": {
+              "buildTarget": "demo:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test"
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["apps/demo/**/*.ts", "apps/demo/**/*.html"],
+            "eslintConfig": "apps/demo/eslint.config.js"
+          }
+        }
+      }
+    },
+    "@vitalie/ngx-signal-devtools": {
+      "projectType": "library",
+      "root": "projects/ngx-signal-devtools",
+      "sourceRoot": "projects/ngx-signal-devtools/src",
+      "prefix": "sdt",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-signal-devtools/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-signal-devtools/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "projects/ngx-signal-devtools/tsconfig.spec.json",
+            "coverageReporters": ["text", "lcov"],
+            "coverageExclude": ["src/public-api.ts"],
+            "coverageThresholds": {
+              "statements": 78,
+              "branches": 68,
+              "functions": 78,
+              "lines": 80
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ngx-signal-devtools/**/*.ts",
+              "projects/ngx-signal-devtools/**/*.html"
+            ],
+            "eslintConfig": "projects/ngx-signal-devtools/eslint.config.js"
+          }
+        }
+      }
+    }
   }
 }

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="ngx-signal-devtools">
+  <rect width="64" height="64" rx="14" fill="#170f2e" />
+  <path
+    d="M11 33h8l5-14 8 28 5-18 4 4h12"
+    fill="none"
+    stroke="#8b5cf6"
+    stroke-width="4"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>
